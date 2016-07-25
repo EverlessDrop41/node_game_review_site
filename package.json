@@ -1,0 +1,24 @@
+{
+  "name": "node_game_review_site",
+  "version": "1.0.0",
+  "description": "A review site focused on making video game reviews",
+  "main": "app.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.14.0",
+    "express-form": "^0.12.6",
+    "mysql": "^2.11.1",
+    "nunjucks": "^2.4.2",
+    "script_sanitize": "^1.0.4",
+    "sequelize": "^3.23.6"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "gulp": "^3.9.1",
+    "mocha": "^2.5.3"
+  }
+}
