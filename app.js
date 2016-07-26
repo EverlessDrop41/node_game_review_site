@@ -3,6 +3,10 @@ var app = express();
 
 var nunjucks = require('nunjucks');
 
+var dateFilter = require('nunjucks-date-filter');
+
+var env = new nunjucks.Environment();
+
 app.set('view engine', 'nunjucks');
 var nEnv = nunjucks.configure('templates', {
     autoescape: false,
@@ -10,6 +14,11 @@ var nEnv = nunjucks.configure('templates', {
     express: app
 });
 
+nEnv.addFilter('date', dateFilter);
+
+nEnv.addFilter('shorten', function(str, count) {
+  return str.slice(0, count || 5);
+});
 
 var bodyParser = require('body-parser');
 app.use(bodyParser.json());

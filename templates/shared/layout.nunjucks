@@ -15,6 +15,10 @@
           .dark-text {
               color: #2c3e50;
           }
+
+          html {
+              background-color: #2C3E50;
+          }
       </style>
     <script src="/node_modules/jquery/dist/jquery.min.js"></script>
     <script src="/node_modules/bootstrap/dist/js/bootstrap.js"></script>
@@ -54,5 +58,17 @@
     <div class="container">
       {% block body %}{% endblock %}
     </div> <!-- /container -->
+
+    <br>
+    <br>
+    <footer class="footer navbar-default">
+        <div class="container">
+            <br>
+            <p style="color: #FFF; margin-bottom: 0;">
+                &copy; Emily Peregrine 2015
+            </p>
+            <br>
+        </div>
+    </footer>
   </body>
 </html>
