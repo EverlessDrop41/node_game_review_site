@@ -12,6 +12,16 @@ var User = db.define('user', {
   email: {
     type: Sequelize.STRING,
     unique: true
+  },
+  isAdmin: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false
+  },
+  authToken: {
+    type: Sequelize.STRING(60)
+  },
+  authTokenExpiration: {
+    type: Sequelize.DATE
   }
 });
 

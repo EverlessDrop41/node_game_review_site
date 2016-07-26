@@ -1,7 +1,10 @@
 {% extends "../shared/layout.nunjucks" %}
 
 {% block body %}
-    <a href="/reviews/create" type="button" class="btn btn-default" role="button">Create</a>
+    {% if current_user and current_user.isAdmin %}
+        <a href="/reviews/create" type="button" class="btn btn-default" role="button">Create</a>
+    {% endif %}
+
     {% for review in reviews %}
         <h1><a href="/reviews/get/{{ review.id }}">{{ review.gameName }} </a><small>{{ review.rating }}/5</small></h1>
         <h4>By: {{ review.reviewer.username }}</h4>

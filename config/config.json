@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "dev",
+    "password": "password",
+    "database": "video_game_review_db",
+    "host": "localhost",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "dev",
+    "password": "password",
+    "database": "video_game_review_db",
+    "host": "localhost",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "dev",
+    "password": "password",
+    "database": "video_game_review_db",
+    "host": "localhost",
+    "dialect": "mysql"
+  }
+}
