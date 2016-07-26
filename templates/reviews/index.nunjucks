@@ -1,0 +1,15 @@
+{% extends "../shared/layout.nunjucks" %}
+
+{% block body %}
+    <a href="/reviews/create" type="button" class="btn btn-default" role="button">Create</a>
+    {% for review in reviews %}
+        <h1><a href="/reviews/get/{{ review.id }}">{{ review.gameName }} </a><small>{{ review.rating }}/5</small></h1>
+        <h4>By: {{ review.reviewer.username }}</h4>
+
+        {% if not loop.last %}
+            <hr>
+            {% endif %}
+    {% else %}
+        <h1 class="text-danger">Could not find any reviews</h1>
+    {% endfor %}
+{% endblock %}

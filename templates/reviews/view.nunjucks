@@ -1,0 +1,15 @@
+{% extends "../shared/layout.nunjucks" %}
+
+{% block body %}
+    {% if review %}
+        <h1>{{ review.gameName }} <small>{{ review.rating }}/5</small></h1>
+        <h4>By: {{ review.reviewer.username }}</h4>
+        <br>
+        <div class="content">
+            {{ review.content }}
+        </div>
+
+    {% else %}
+        <h1 class="text-danger">Could not find a review with that id</h1>
+    {% endif %}
+{% endblock %}
