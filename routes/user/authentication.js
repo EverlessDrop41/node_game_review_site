@@ -13,19 +13,32 @@ var user = require("../../models/user");
 
 const saltRounds = 10;
 
-function randomString(len, charSet) {
-  charSet = charSet || 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!?&%*()@';
-  var randomString = '';
-  for (var i = 0; i < len; i++) {
-    var randomPoz = Math.floor(Math.random() * charSet.length);
-    randomString += charSet.substring(randomPoz,randomPoz+1);
-  }
-  return randomString;
-}
+router.all('/logout', utils.getUser, function (req, res) {
+  req.session.authToken = null;
+  user.findById(req.current_user.id).then(function (user) {
+    if (user) {
+      user.authTokenExpiration = null;
+      user.save().then(function () {
+        res.redirect("/");
+      });
+    } else {
+      res.redirect("/");
+    }
+  });
+});
 
-router.all('/logout', function (req, res) {
-  req.session.authKey = null;
-  res.redirect('/');
+router.all('/logout_token_exp', utils.getUser, function (req, res) {
+  req.session.authToken = null;
+  user.findById(req.current_user.id).then(function (user) {
+    if (user) {
+      user.authTokenExpiration = null;
+      user.save().then(function () {
+        res.redirect("/user/login");
+      });
+    } else {
+      res.redirect("/user/login");
+    }
+  });
 });
 
 router.get('/login', function (req, res) {
@@ -46,8 +59,7 @@ router.post('/login', loginForm, function(req, res) {
             user.authToken = bcrypt.hashSync(req.body.username + req.body.password, 5);
             user.authTokenExpiration = utils.nextweek();
 
-            req.session.authKey = user.authToken;
-
+            req.session.authToken = user.authToken;
 
             user.save().then(function () {
               res.redirect('/');

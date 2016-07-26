@@ -2,16 +2,32 @@ var user = require("./models/user");
 
 var loginURI = "/user/login";
 
+function addDays (date, days) {
+  var dat = new Date(this.valueOf());
+  dat.setDate(date + days);
+  return dat;
+}
+
+function nw() {
+  var ms = new Date().getTime() + 86400000 * 7;
+  return new Date(ms);
+}
+
 module.exports = {
+  nextweek: nw,
   loginUser:  function(req, res, next) {
-    if (req.session && req.session.authKey) {
+    if (req.session && req.session.authToken) {
       user.findOne({
         where: {
-          authToken: req.session.authKey
+          authToken: req.session.authToken
         }
       }).then(function (user) {
         if (user) {
-          console.log(user.authTokenExpiration);
+
+          if(user.authTokenExpiration < new Date()) {
+            res.redirect("/user/logout_token_exp");
+            return;
+          }
 
           req.current_user = {
             id: user.id,
@@ -30,13 +46,18 @@ module.exports = {
     }
   },
   getUser: function (req, res, next) {
-    if (req.session && req.session.authKey) {
+    if (req.session && req.session.authToken) {
       user.findOne({
         where: {
-          authToken: req.session.authKey
+          authToken: req.session.authToken
         }
       }).then(function (user) {
         if (user) {
+
+          if(user.authTokenExpiration < new Date()) {
+            res.redirect("/user/logout_token_exp");
+            return;
+          }
 
           req.current_user = {
             id: user.id,
@@ -47,17 +68,12 @@ module.exports = {
 
           next();
         } else {
-          req.session.authKey = null;
+          req.session.authToken = null;
           next()
         }
       });
     } else {
       next();
     }
-  },
-  nextweek: function (){
-    var today = new Date();
-    var nextweek = new Date(today.getFullYear(), today.getMonth(), today.getDate()+7);
-    return nextweek;
   }
 };
