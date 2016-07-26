@@ -1,0 +1,40 @@
+{% extends "../shared/layout.nunjucks" %}
+
+{% block body %}
+    <script src="http://listjs.com/no-cdn/list.js"></script>
+    <h1>Manage Reviews</h1>
+    <div id="reviews">
+        <label for="search">Search</label>
+        <input class="search form-control" id="search" placeholder="Search" />
+
+        <br>
+
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>Id</th> <th>Name</th> <th>Rating</th> <th>Edit</th> <th>Delete</th>
+            </tr>
+            </thead>
+            <tbody class="list">
+            {% for review in reviews %}
+                <tr>
+                    <td class="id">{{ review.id }}</td>
+                    <td class="name">{{ review.gameName }}</td>
+                    <td class="rating">{{ review.rating }}/5</td>
+                    <td><a href="/review/edit/{{ review.id }}">Edit</a></td>
+                    <td><a class="text-danger" href="/review/edit/{{ review.id }}">Delete</a></td>
+                </tr>
+
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <script>
+        var options = {
+            valueNames: [ 'id', 'name', 'rating' ]
+        };
+
+        var reviewTable = new List('reviews', options);
+    </script>
+
+{% endblock %}

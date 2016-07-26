@@ -51,7 +51,7 @@
 
                 <ul class="dropdown-menu">
                     <li><a href="/reviews/create">Create New Review</a></li>
-                    <li><a href="#">Manage Reviews</a></li>
+                    <li><a href="/reviews/manage">Manage Reviews</a></li>
                 </ul>
             </li>
             {% endif %}

@@ -15,51 +15,5 @@
     </p>
   </div>
 
-  <div class="media">
-    <div class="media-left">
-      <a href="#">
-        <i class="fa fa-newspaper-o fa-xl dark-text" aria-hidden="true"></i>
-      </a>
-    </div>
-    <div class="media-body">
-      <h4 class="media-heading">Kentucky Route Zero</h4>
-      Kentucky Route Zero is a magic realist adventure game about a secret highway in Kentucky and the mysterious folks
-    </div>
-  </div>
-
-  <div class="media">
-    <div class="media-left">
-      <a href="#">
-        <i class="fa fa-newspaper-o fa-xl dark-text" aria-hidden="true"></i>
-      </a>
-    </div>
-    <div class="media-body">
-      <h4 class="media-heading">I Am Setsuna</h4>
-      I am Setsuna is an RPG that is based on the classic role-playing experiences of old.
-    </div>
-  </div>
-
-  <div class="media">
-    <div class="media-left">
-      <a href="#">
-        <i class="fa fa-newspaper-o fa-xl dark-text" aria-hidden="true"></i>
-      </a>
-    </div>
-    <div class="media-body">
-      <h4 class="media-heading">Kerbal Space Program</h4>
-      Kerbal Space Program is a multi-genre game where the player can create his own space program.
-    </div>
-  </div>
-
-  <div class="media">
-    <div class="media-left">
-      <a href="#">
-        <i class="fa fa-newspaper-o fa-xl dark-text" aria-hidden="true"></i>
-      </a>
-    </div>
-    <div class="media-body">
-      <h4 class="media-heading">Necropolis</h4>
-      An action role-playing roguelike from developer Harebrained Schemes, where each death means starting over from the beginning in a randomized dungeon.
-    </div>
-  </div>
+  <a class="btn btn-lg btn-primary" href="/reviews/" role="button">Checkout the reviews</a>
 {% endblock %}
