@@ -16,7 +16,31 @@ router.get('/login', function (req, res) {
 });
 
 router.post('/login', loginForm, function(req, res) {
+  if (req.form && req.form.isValid) {
 
+    user.findOne({
+      where: {email: req.body.email}
+    }).then(function (user) {
+      if (user) {
+        bcrypt.compare(req.body.password, user.password, function(err, match) {
+          if (match) {
+            res.send(user);
+          } else {
+            var tParams = req.app.locals.getTemplateParams(req);
+            tParams.formErrors.password = "Incorrect Username/Password";
+            res.render('auth/login', tParams);
+          }
+        });
+      } else {
+        var tParams = req.app.locals.getTemplateParams(req);
+        tParams.formErrors.password = "Incorrect Username/Password";
+        res.render('auth/login', tParams);
+      }
+    });
+
+  } else {
+    res.render('auth/login', req.app.locals.getTemplateParams(req));
+  }
 });
 
 router.get('/register', function (req, res) {
