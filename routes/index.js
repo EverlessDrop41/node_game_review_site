@@ -6,7 +6,7 @@ var userRouter = require("./user");
 router.use('/user', userRouter);
 
 router.get('/', function(req, res){
-  res.render('index');
+  res.render('index', res.app.locals.getTemplateParams(req));
 });
 
 module.exports = router;

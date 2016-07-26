@@ -15,6 +15,15 @@ var bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+var cookieSession = require('cookie-session');
+
+app.set('trust proxy', 1); // trust first proxy
+
+app.use(cookieSession({
+  name: 'session',
+  keys: ['key1', 'key2']
+}));
+
 app.use(express.static('public'));
 
 var IsProd = process.env.IS_PRODUCTION || false;
@@ -30,7 +39,7 @@ db.sync();
 app.locals.getTemplateParams = function (req) {
   return {
     app_name: "Video Game Review Site",
-    current_user: app.locals.user,
+    current_user: req.session.user,
     formErrors: req.form ? req.form.getErrors() : undefined
   }
 };

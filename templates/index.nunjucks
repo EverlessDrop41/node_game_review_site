@@ -4,9 +4,14 @@
   <div class="jumbotron">
     <h1>Video Game Reviews</h1>
     <p>We review video games</p>
+    <hr>
     <p>
+      {% if not current_user %}
       <a class="btn btn-lg btn-primary" href="/user/login" role="button">Login</a>
       <a class="btn btn-lg btn-primary" href="/user/register" role="button">Register</a>
+      {% else %}
+        <p>Your are logged in as {{ current_user.username }}</p>
+      {% endif %}
     </p>
   </div>
 

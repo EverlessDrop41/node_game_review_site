@@ -11,8 +11,13 @@ var user = require("../../models/user");
 
 const saltRounds = 10;
 
+router.all('/logout', function (req, res) {
+  req.session.user = null;
+  res.redirect('/');
+});
+
 router.get('/login', function (req, res) {
-  res.render('auth/login');
+  res.render('auth/login', res.app.locals.getTemplateParams(req));
 });
 
 router.post('/login', loginForm, function(req, res) {
@@ -24,7 +29,9 @@ router.post('/login', loginForm, function(req, res) {
       if (user) {
         bcrypt.compare(req.body.password, user.password, function(err, match) {
           if (match) {
-            res.send(user);
+            if (req.session == null) req.session = {};
+            req.session.user = user;
+            res.redirect('/');
           } else {
             var tParams = req.app.locals.getTemplateParams(req);
             tParams.formErrors.password = "Incorrect Username/Password";
@@ -44,7 +51,7 @@ router.post('/login', loginForm, function(req, res) {
 });
 
 router.get('/register', function (req, res) {
-  res.render('auth/register');
+  res.render('auth/register', res.app.locals.getTemplateParams(req));
 });
 
 router.post('/register', registerForm, function(req, res) {
