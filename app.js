@@ -26,13 +26,12 @@ app.use(cookieSession({
 
 app.use(express.static('public'));
 
-var IsProd = process.env.IS_PRODUCTION || false;
-var IsDev = !IsProd;
+var config = require("./config");
 
 var db = require("./db");
 var review = require("./models/review");
 var user = require("./models/user");
-review.sync({force: IsDev});
+review.sync({force: config.isDevelopment});
 //user.sync({force: IsDev});
 db.sync();
 
@@ -48,6 +47,8 @@ app.locals.getTemplateParams = function (req) {
 var index_route = require("./routes/index");
 app.use('/', index_route);
 
-app.listen(3000, function () {
-  console.log('Example app listening on port 3000!');
+var port = config.port;
+
+app.listen(port, function () {
+  console.log('Example app listening on port ' + port + '!');
 });
