@@ -9,21 +9,52 @@
 
 
 <div class="container">
-
-    <form class="form-signin">
+    <form method="post" class="form-signin">
         <h2 class="form-signin-heading">Register</h2>
 
         <label for="email">Email address</label>
-        <input type="email" id="email" class="form-control" placeholder="Email address" required autofocus>
+        <input type="email" id="email" name="email" class="form-control" placeholder="Email address" required autofocus>
+        {% if formErrors and formErrors.email %}
+            <br>
+            <ul class="text-danger">
+            {% for error in formErrors.email %}
+                <li>{{ error }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
         <br>
         <label for="username">Username</label>
-        <input type="text" id="username" class="form-control" placeholder="Username" required autofocus>
+        <input type="text" id="username" name="username" class="form-control" placeholder="Username" required autofocus>
+        {% if formErrors and formErrors.username %}
+            <br>
+            <ul class="text-danger">
+                {% for error in formErrors.username %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
         <br>
-        <label for="inputPassword">Password</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+        {% if formErrors and formErrors.password %}
+            <br>
+            <ul class="text-danger">
+                {% for error in formErrors.password %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
         <br>
         <label for="confirm_password">Confirm Password</label>
-        <input type="password" id="confirm_password" class="form-control" placeholder="Confirm Password" required>
+        <input type="password" id="confirm_password" name="confirm_password" class="form-control" placeholder="Confirm Password" required>
+        {% if formErrors and formErrors.confirm_password %}
+            <br>
+            <ul class="text-danger">
+                {% for error in formErrors.confirm_password %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
         <br>
 
         <button class="btn btn-primary btn-block" type="submit">Register</button>

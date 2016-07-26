@@ -3,16 +3,15 @@ var db = require("../db");
 
 var User = db.define('user', {
   username: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
+    unique: true
   },
   password: {
     type: Sequelize.STRING
   },
-  salt: {
-    type: Sequelize.STRING
-  },
   email: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
+    unique: true
   }
 });
 
