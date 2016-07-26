@@ -6,9 +6,11 @@ var userModel = require("../../models/user");
 
 var script_sanitize = require('script_sanitize').sanitize;
 
-router.get('/get', function(req, res) {res.redirect('/reviews')});
+var utils = require("../../utils");
 
-router.get('/', function (req, res) {
+router.get('/get', utils.getUser,function(req, res) {res.redirect('/reviews')});
+
+router.get('/', utils.getUser,function (req, res) {
   reviewModel.findAll({include:[{ model: userModel, as: "reviewer" }]})
     .then(function(reviews) {
       tParams = req.app.locals.getTemplateParams(req);
@@ -17,7 +19,7 @@ router.get('/', function (req, res) {
     })
 });
 
-router.get('/get/:id', function (req, res) {
+router.get('/get/:id', utils.getUser, function (req, res) {
 
   reviewModel.findAll({
     where: {

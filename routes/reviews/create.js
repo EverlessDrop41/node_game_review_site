@@ -5,11 +5,13 @@ var reviewModel = require("../../models/review");
 
 var reviewForm = require("../../forms/review/create_review");
 
-router.get('/', function (req, res) {
+var utils = require("../../utils");
+
+router.get('/', utils.loginUser, function (req, res) {
   res.render('reviews/create', req.app.locals.getTemplateParams(req));
 });
 
-router.post('/', reviewForm, function (req, res) {
+router.post('/', reviewForm, utils.loginUser, function (req, res) {
   if (req.form && req.form.isValid) {
     reviewModel.create({
       gameName: req.form.name,

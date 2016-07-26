@@ -38,7 +38,7 @@ db.sync();
 app.locals.getTemplateParams = function (req) {
   return {
     app_name: "Video Game Review Site",
-    current_user: req.session.user,
+    current_user: req.current_user,
     formErrors: req.form ? req.form.getErrors() : undefined
   }
 };

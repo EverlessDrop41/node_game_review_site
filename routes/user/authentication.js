@@ -7,12 +7,24 @@ var field = form.field;
 var loginForm = require("../../forms/user/login");
 var registerForm = require("../../forms/user/register");
 
+var utils = require("../../utils");
+
 var user = require("../../models/user");
 
 const saltRounds = 10;
 
+function randomString(len, charSet) {
+  charSet = charSet || 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!?&%*()@';
+  var randomString = '';
+  for (var i = 0; i < len; i++) {
+    var randomPoz = Math.floor(Math.random() * charSet.length);
+    randomString += charSet.substring(randomPoz,randomPoz+1);
+  }
+  return randomString;
+}
+
 router.all('/logout', function (req, res) {
-  req.session.user = null;
+  req.session.authKey = null;
   res.redirect('/');
 });
 
@@ -30,8 +42,16 @@ router.post('/login', loginForm, function(req, res) {
         bcrypt.compare(req.body.password, user.password, function(err, match) {
           if (match) {
             if (req.session == null) req.session = {};
-            req.session.user = user;
-            res.redirect('/');
+
+            user.authToken = bcrypt.hashSync(req.body.username + req.body.password, 5);
+            user.authTokenExpiration = utils.nextweek();
+
+            req.session.authKey = user.authToken;
+
+
+            user.save().then(function () {
+              res.redirect('/');
+            });
           } else {
             var tParams = req.app.locals.getTemplateParams(req);
             tParams.formErrors.password = "Incorrect Username/Password";
@@ -71,7 +91,7 @@ router.post('/register', registerForm, function(req, res) {
           }
         }).spread(function (user, created) {
           if (created) {
-            res.redirect('/');
+            res.redirect('/login');
           } else {
             var isUniqueUsername = !(user.username == req.body.username);
             var isUniqueEmail = !(user.email == req.body.email);
