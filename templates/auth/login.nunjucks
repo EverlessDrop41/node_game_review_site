@@ -9,11 +9,6 @@
 
 
     <div class="container">
-        <ul>
-            {% for key, error in formErrors %}
-                <li>{{ key }}: {{ error }}</li>
-            {% endfor %}
-        </ul>
         <form method="post" class="form-signin">
             <h2 class="form-signin-heading">Login</h2>
 

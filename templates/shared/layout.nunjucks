@@ -6,6 +6,7 @@
     <link rel="stylesheet" type="text/css" href="/node_modules/bootstrap/dist/css/bootstrap.css">
       <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.6/flatly/bootstrap.min.css" rel="stylesheet" integrity="sha384-XYCjB+hFAjSbgf9yKUgbysEjaVLOXhCgATTEBpCqT1R3jvG5LGRAK5ZIyRbH5vpX" crossorigin="anonymous">
       <link rel="stylesheet" type="text/css" href="/node_modules/font-awesome/css/font-awesome.css">
+      <link rel="stylesheet" type="text/css" href="/node_modules/bootstrap-slider/dist/css/bootstrap-slider.css">
 
       <style>
           .fa-xl {
@@ -17,6 +18,8 @@
       </style>
     <script src="/node_modules/jquery/dist/jquery.min.js"></script>
     <script src="/node_modules/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="/node_modules/bootstrap-slider/dist/bootstrap-slider.js"></script>
+      <script src="/node_modules/tinymce/tinymce.js"></script>
   </head>
   <body>
     <nav class="navbar navbar-default navbar-static-top">

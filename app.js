@@ -31,8 +31,8 @@ var config = require("./config");
 var db = require("./db");
 var review = require("./models/review");
 var user = require("./models/user");
-review.sync({force: config.isDevelopment});
-//user.sync({force: IsDev});
+review.sync();
+user.sync();
 db.sync();
 
 app.locals.getTemplateParams = function (req) {
