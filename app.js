@@ -5,7 +5,7 @@ var nunjucks = require('nunjucks');
 
 app.set('view engine', 'nunjucks');
 var nEnv = nunjucks.configure('templates', {
-    autoescape: true,
+    autoescape: false,
     noCache: true,
     express: app
 });
