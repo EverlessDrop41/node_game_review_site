@@ -1,8 +1,8 @@
 var Sequelize = require('sequelize');
 
-var db = new Sequelize('video_game_review_db', 'dev', 'password', {
-  host: 'localhost',
-  dialect: 'mysql'
+var db = new Sequelize('video_game_review_db', config.db_username, config.db_password, {
+  host: config.db_host,
+  dialect: config.db_dialect
 });
 
 db.authenticate().then(function(err) {
