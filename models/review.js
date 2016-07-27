@@ -10,7 +10,7 @@ var Review = db.define('review', {
     type: Sequelize.STRING(10000)
   },
   rating: {
-    type: Sequelize.INTEGER(100)
+    type: Sequelize.INTEGER(5)
   }
 });
 

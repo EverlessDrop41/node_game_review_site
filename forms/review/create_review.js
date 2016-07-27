@@ -10,7 +10,7 @@ var login_form = form(
 
   field("rating").toInt().custom(function (val) {
     if (val < 0) { val = 0; }
-    if (val > 100) { val = 100; }
+    if (val > 5) { val = 5; }
     return val
   }).required()
 );

@@ -2,13 +2,7 @@
 
 {% block body %}
     {% if review %}
-
-        {% if current_user and current_user.isAdmin %}
-            <a href="/reviews/manage/edit/{{ review.id }}" type="button" class="btn btn-warning" role="button">Update</a>
-            <a href="/reviews/manage/delete/{{ review.id }}" type="button" class="btn btn-danger" role="button">Delete</a>
-        {% endif %}
-
-        <h1>{{ review.gameName }} <small>{{ review.rating }}/100</small></h1>
+        <h1>{{ review.gameName }} <small>{{ review.rating }}/5</small></h1>
         <h4>By: {{ review.reviewer.username }} <small>{{ review.createdAt | date("DD/MM/YYYY") }}</small></h4>
         <div class="content">
             {{ review.content }}

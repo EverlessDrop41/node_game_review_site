@@ -50,17 +50,4 @@ router.post("/edit/:id", utils.loginUser, reviewForm, function(req, res) {
   }
 });
 
-router.get("/delete/:id", utils.loginUser, function(req, res) {
-  reviewModel.findById(req.params.id).then(function (review) {
-    if (review) {
-      review.destroy().then(function () {
-        res.redirect("/reviews/manage");
-      });
-    }
-    else {
-      res.redirect("/reviews/manage");
-    }
-  });
-});
-
 module.exports = router;
