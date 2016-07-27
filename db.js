@@ -1,4 +1,4 @@
-var Sequelize = require('Sequelize');
+var Sequelize = require('sequelize');
 
 var db = new Sequelize('video_game_review_db', 'dev', 'password', {
   host: 'localhost',
