@@ -1,0 +1,74 @@
+{% extends "../shared/layout.nunjucks" %}
+
+{% block body %}
+
+
+    <div class="container">
+        <form method="post" id="review_form">
+            <h2 class="form-signin-heading">Edit Review</h2>
+
+            <input type="hidden" name="userId" value={{ current_user.id }}>
+
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" class="form-control"
+                   value="{{ review.gameName }}" placeholder="Name" required autofocus>
+            {% if formErrors and formErrors.name %}
+                <br>
+                <ul class="text-danger">
+                    {% for error in formErrors.name %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+            <br>
+            <label for="r_content">Content</label>
+            <textarea id="r_content" name="r_content" class="form-control" placeholder="content">{{ review.content }}</textarea>
+            {% if formErrors and formErrors.r_content %}
+                <br>
+                <ul class="text-danger">
+                    {% for error in formErrors.r_content %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+            <br>
+            <label for="rating">Rating</label>
+            <br>
+            <input type="text" name="rating" id="rating"
+                   data-slider-min="1" data-slider-max="5" data-slider-step="1" data-slider-value="{{ review.rating }}" required>
+            <br>
+            <br>
+            {% if formErrors and formErrors.rating %}
+                <ul class="text-danger">
+                    {% for error in formErrors.rating %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+            <button class="btn btn-primary btn-block" type="submit">Submit</button>
+        </form>
+
+    </div> <!-- /container -->
+
+    <script>
+        $("#rating").bootstrapSlider();
+        tinymce.init({
+            selector: '#r_content',
+            theme: 'modern',
+            plugins: [
+                'advlist autolink lists link image charmap print preview hr anchor pagebreak',
+                'searchreplace wordcount visualblocks visualchars code fullscreen',
+                'insertdatetime media nonbreaking save table contextmenu directionality',
+                'emoticons template paste textcolor colorpicker textpattern imagetools'
+            ],
+            toolbar1: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+            toolbar2: 'print preview media | forecolor backcolor emoticons',
+            image_advtab: true
+        });
+        $("#review_form").submit(function () {
+            tinymce.triggerSave();
+        });
+
+    </script>
+{% endblock %}
