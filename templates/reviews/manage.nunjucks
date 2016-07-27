@@ -7,7 +7,11 @@
         <label for="search">Search</label>
         <input class="search form-control" id="search" placeholder="Search" />
 
-        <br>
+        <hr>
+
+        <a href="/reviews/create" type="button" class="btn btn-block btn-success" role="button">Create</a>
+
+        <hr/>
 
         <table class="table table-bordered">
             <thead>
@@ -20,7 +24,7 @@
                 <tr>
                     <td class="id">{{ review.id }}</td>
                     <td class="name">{{ review.gameName }}</td>
-                    <td class="rating">{{ review.rating }}/5</td>
+                    <td class="rating">{{ review.rating }}/100</td>
                     <td><a href="/reviews/manage/edit/{{ review.id }}">Edit</a></td>
                     <td><a class="text-danger" href="/reviews/manage/delete/{{ review.id }}">Delete</a></td>
                 </tr>
